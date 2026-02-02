@@ -38,7 +38,7 @@ O SoloSync nasceu da necessidade de profissionais autônomos terem uma visão cl
    ```bash
    python -m venv venv # Criando o ambiente virtual
    venv\Scripts\activate # Ativando no Windows
-   source venv/activate # Ativando no Linux/Mac
+   source venv/bin/activate # Ativando no Linux/Mac
 
 3. **Instale as dependências:**
    ```bash
