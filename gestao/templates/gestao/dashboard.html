@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoloSync - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+
+<div class="main-container">
+    <header class="dashboard-header">
+        <h1>🚀 SoloSync <span>Dashboard</span></h1>
+        <p>Gerencie seus projetos e finanças de forma simples.</p>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card total">
+            <h3>Faturamento Total</h3>
+            <p class="value">R$ {{ faturamento_total }}</p>
+        </div>
+        <div class="stat-card active">
+            <h3>Projetos Ativos</h3>
+            <p class="value">{{ projetos_ativos }}</p>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h3>Seus Projetos</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Cliente</th>
+                        <th>Prazo</th>
+                        <th>Status</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for projeto in projetos %}
+                    <tr>
+                        <td class="font-bold">{{ projeto.titulo }}</td>
+                        <td>{{ projeto.cliente.nome }}</td>
+                        <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
+                        <td>
+                            <span class="status-badge {{ projeto.status }}">
+                                {{ projeto.get_status_display }}
+                            </span>
+                        </td>
+                        <td class="price">R$ {{ projeto.valor_fechado }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-msg">Nenhum projeto cadastrado ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
