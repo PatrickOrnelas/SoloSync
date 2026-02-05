@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoloSync - Home</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body class="home-body">
+
+    <div class="sidebar" id="sidebar">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="menu-items">
+            <a href="{% url 'index' %}" class="active">🏠 <span>Home</span></a>
+            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
+            <a href="{% url "criar-projeto" %}">📁 <span>Projetos</span></a>
+            <a href="#">👥 <span>Clientes</span></a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header class="home-header">
+            <h1>Bem-vindo ao <span>SoloSync</span>!</h1>
+            <p>Sua central de controle freelancer.</p>
+        </header>
+
+        <section class="welcome-section">
+            <div class="welcome-card">
+                <h2>🚧 Página em Desenvolvimento</h2>
+                <p>Estamos preparando algo incrível para você gerenciar seus jobs com um clique.</p>
+                <div class="loader-simple"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('aberta');
+        }
+    </script>
+</body>
+</html>

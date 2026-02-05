@@ -8,6 +8,20 @@
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
+    <div class="sidebar" id="sidebar">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="menu-items">
+            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
+            <a href="{% url 'dashboard' %}" class="active">📊 <span>Dashboard</span></a>
+            <a href="{% url "criar-projeto" %}">📁 <span>Projetos</span></a>
+            <a href="#">👥 <span>Clientes</span></a>
+        </nav>
+    </div>
 
 <div class="main-container">
     <header class="dashboard-header">
@@ -62,6 +76,11 @@
         </div>
     </section>
 </div>
-
+     <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('aberta');
+        }
+    </script>
 </body>
 </html>

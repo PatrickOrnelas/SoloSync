@@ -2,6 +2,16 @@ from django.shortcuts import render
 from .models import Projeto
 from django.db.models import Sum
 
+def index(request):
+    return render(request=request, template_name='gestao/index.html')
+
+def criar_projeto(request):
+    return render(request=request, template_name='gestao/projetos.html')
+
+def criar_cliente(request):
+    pass
+
+
 def dashboard(request):
     # Consulta todos os projetos
     projetos = Projeto.objects.all()

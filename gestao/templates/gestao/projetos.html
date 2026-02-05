@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos - SoloSync</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="menu-items">
+            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
+            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
+            <a href="{% url "criar-projeto" %}" class="active">📁 <span>Projetos</span></a>
+            <a href="#">👥 <span>Clientes</span></a>
+        </nav>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('aberta');
+        }
+    </script>
+</body>
+</html>
