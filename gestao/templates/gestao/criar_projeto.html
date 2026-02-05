@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Projeto - SoloSync</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+    {% include "gestao/partials/_sidebar.html" %}
+    
+    <div class="main-content">
+        <section class="form-section">
+            <header class="dashboard-header">
+                <h1>Novo <span>Projeto</span></h1>
+            </header>
+
+            <div class="welcome-card" style="text-align: left;">
+                <form method="POST">
+                    {% csrf_token %} {% for field in form %}
+                        <div style="margin-bottom: 15px;">
+                            <label style="display: block; font-weight: 600;">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <span style="color: red; font-size: 0.8rem;">{{ field.errors }}</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn-primary">Salvar Projeto</button>
+                    <a href="{% url 'listar-projetos' %}" style="margin-left: 10px; color: #64748b;">Cancelar</a>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    {% include "gestao/partials/_script.html" %}
+</body>
+</html>

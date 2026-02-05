@@ -1,14 +1,14 @@
-from django.shortcuts import render
+from pyexpat.errors import messages
+from django.shortcuts import redirect, render
 from .models import Projeto, Cliente, Tarefa
 from django.db.models import Sum
+from .forms import ProjetoForm
 
 # View de inicio
 def index(request):
     return render(request=request, template_name='gestao/index.html')
 
 # Views relacionados com projetos
-def criar_projeto(request):
-    return render(request=request, template_name='gestao/projetos.html')
 
 def listar_projetos(request):
     projetos = Projeto.objects.all()
@@ -17,6 +17,33 @@ def listar_projetos(request):
         'projetos' : projetos
     }
     return render(request=request, template_name='gestao/projetos.html', context=context)
+
+def criar_projeto(request):
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar-projetos')
+    else:
+        form = ProjetoForm()
+
+    context = {
+        'form' : form
+    }
+
+    return render(request=request, template_name='gestao/criar_projeto.html', context=context)
+
+def detalhar_projeto(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    context = {
+        'projeto' : projeto
+    }
+    return render(request=request, template_name='gestao/detalhar_projeto.html', context=context)
+
+def deletar_projeto(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    projeto.delete()
+    return redirect('listar-projetos')
 
 # Views relacionados com clientes
 def criar_cliente(request):

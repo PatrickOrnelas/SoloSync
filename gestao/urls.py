@@ -8,8 +8,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     # URLs para Projetos
     path('projetos/', views.listar_projetos, name='listar-projetos'),
-    # path('projetos/criar-projeto/', views.criar_projeto, name='criar-projeto'),
-    # path('projetos/<int:projeto_id>/', views.detalhar_projeto, name='detalhar-projeto'),
+    path('projetos/criar-projeto/', views.criar_projeto, name='criar-projeto'),
+    path('projetos/<int:projeto_id>/', views.detalhar_projeto, name='detalhar-projeto'),
+    path('projetos/<int:projeto_id>/deletar/', views.deletar_projeto, name='deletar-projeto'),
     # URLs para Clientes
     path('clientes/', views.listar_clientes, name='listar-clientes'),
     # path('clientes/criar-cliente/', views.criar_cliente, name='criar-cliente'),

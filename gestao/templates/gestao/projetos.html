@@ -13,6 +13,9 @@
         <header class="home-header">
             <h1>Projetos</h1>
             <p>Gerencie seus projetos e acompanhe o progresso de cada um.</p>
+            <div class="header-actions">
+                <a href="{% url 'criar-projeto' %}" class="btn-primary">+ Novo Projeto</a>
+            </div>
         </header>
         <h3>Seus Projetos</h3>
         <div class="table-container">
@@ -24,12 +27,13 @@
                         <th>Prazo</th>
                         <th>Status</th>
                         <th>Valor</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for projeto in projetos %}
                     <tr>
-                        <td class="font-bold"><a href="">{{ projeto.titulo }}</a></td>
+                        <td class="font-bold"><a href="{% url 'detalhar-projeto' projeto.id %}">{{ projeto.titulo }}</a></td>
                         <td>{{ projeto.cliente.nome }}</td>
                         <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
                         <td>
@@ -38,6 +42,10 @@
                             </span>
                         </td>
                         <td class="price">R$ {{ projeto.valor_fechado }}</td>
+                        <td>
+                            <a href="">Editar</a>
+                            <a href="{% url 'deletar-projeto' projeto.id %}" onclick="return confirm('Tem certeza que deseja deletar este projeto?')">Deletar</a>
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>

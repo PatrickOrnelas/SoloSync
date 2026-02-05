@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhar Projeto</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+    {% include "gestao/partials/_sidebar.html" %}
+    <div class="main-content">
+        <h1>{{ projeto.titulo }}</h1>
+        <p><strong>Cliente:</strong> {{ projeto.cliente.nome }}</p>
+        <p><strong>Descrição:</strong> {{ projeto.descricao }}</p>
+        <p><strong>Prazo de Entrega:</strong> {{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
+        <p><strong>Status:</strong> {{ projeto.get_status_display }}</p>
+        <p><strong>Valor Fechado:</strong> R$ {{ projeto.valor_fechado }}</p>
+        <a href="{% url 'listar-projetos' %}">Voltar para a lista de projetos</a>
+    </div>
+    {% include "gestao/partials/_script.html" %}
+</body>
+</html>
