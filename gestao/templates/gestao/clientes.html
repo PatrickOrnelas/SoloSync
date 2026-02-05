@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - SoloSync</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+    {% include "gestao/partials/_sidebar.html" %}
+    <div class="main-content">
+        <h1>Clientes</h1>
+        <p>Aqui você pode visualizar e gerenciar os clientes da sua empresa.</p>
+        <section class="clients-section">
+            <h3>Seus Clientes</h3>
+            <div class="table-container">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Empresa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cliente in clientes  %}
+                        <tr>
+                            <td class="font-bold"><a href="">{{ cliente.nome }}</a></td>
+                            <td>{{ cliente.email }}</td>
+                            <td>{{ cliente.telefone }}</td>
+                            <td>{{ cliente.empresa }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    {% include "gestao/partials/_development.html" %}
+    {% include "gestao/partials/_script.html" %}
+</body>
+</html>

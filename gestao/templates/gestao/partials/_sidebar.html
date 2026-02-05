@@ -1,0 +1,14 @@
+<div class="sidebar" id="sidebar">
+        <div class="menu-icon" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="menu-items">
+            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
+            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
+            <a href="{% url "listar-projetos" %}">📁 <span>Projetos</span></a>
+            <a href="{% url "listar-clientes" %}">👥 <span>Clientes</span></a>
+        </nav>
+    </div>

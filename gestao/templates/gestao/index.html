@@ -9,20 +9,7 @@
 </head>
 <body class="home-body">
 
-    <div class="sidebar" id="sidebar">
-        <div class="menu-icon" onclick="toggleSidebar()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <nav class="menu-items">
-            <a href="{% url 'index' %}" class="active">🏠 <span>Home</span></a>
-            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
-            <a href="{% url "criar-projeto" %}">📁 <span>Projetos</span></a>
-            <a href="#">👥 <span>Clientes</span></a>
-        </nav>
-    </div>
+    {% include "gestao/partials/_sidebar.html" %}
 
     <div class="main-content">
         <header class="home-header">
@@ -30,20 +17,9 @@
             <p>Sua central de controle freelancer.</p>
         </header>
 
-        <section class="welcome-section">
-            <div class="welcome-card">
-                <h2>🚧 Página em Desenvolvimento</h2>
-                <p>Estamos preparando algo incrível para você gerenciar seus jobs com um clique.</p>
-                <div class="loader-simple"></div>
-            </div>
-        </section>
+        {% include "gestao/partials/_development.html" %}
     </div>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('aberta');
-        }
-    </script>
+    {% include "gestao/partials/_script.html" %}
 </body>
 </html>

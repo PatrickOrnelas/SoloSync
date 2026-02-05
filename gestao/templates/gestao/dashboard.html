@@ -8,22 +8,8 @@
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <div class="menu-icon" onclick="toggleSidebar()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <nav class="menu-items">
-            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
-            <a href="{% url 'dashboard' %}" class="active">📊 <span>Dashboard</span></a>
-            <a href="{% url "criar-projeto" %}">📁 <span>Projetos</span></a>
-            <a href="#">👥 <span>Clientes</span></a>
-        </nav>
-    </div>
-
-<div class="main-container">
+    {% include "gestao/partials/_sidebar.html" %}
+<div class="main-content">
     <header class="dashboard-header">
         <h1>🚀 SoloSync <span>Dashboard</span></h1>
         <p>Gerencie seus projetos e finanças de forma simples.</p>
@@ -56,7 +42,7 @@
                 <tbody>
                     {% for projeto in projetos %}
                     <tr>
-                        <td class="font-bold">{{ projeto.titulo }}</td>
+                        <td class="font-bold"><a href="">{{ projeto.titulo }}</a></td>
                         <td>{{ projeto.cliente.nome }}</td>
                         <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
                         <td>
@@ -76,11 +62,6 @@
         </div>
     </section>
 </div>
-     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('aberta');
-        }
-    </script>
+     {% include "gestao/partials/_script.html" %}
 </body>
 </html>

@@ -8,25 +8,48 @@
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
-    <div class="sidebar" id="sidebar">
-        <div class="menu-icon" onclick="toggleSidebar()">
-            <span></span>
-            <span></span>
-            <span></span>
+    {% include "gestao/partials/_sidebar.html" %}
+    <div class="main-content">
+        <header class="home-header">
+            <h1>Projetos</h1>
+            <p>Gerencie seus projetos e acompanhe o progresso de cada um.</p>
+        </header>
+        <h3>Seus Projetos</h3>
+        <div class="table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Cliente</th>
+                        <th>Prazo</th>
+                        <th>Status</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for projeto in projetos %}
+                    <tr>
+                        <td class="font-bold"><a href="">{{ projeto.titulo }}</a></td>
+                        <td>{{ projeto.cliente.nome }}</td>
+                        <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
+                        <td>
+                            <span class="status-badge {{ projeto.status }}">
+                                {{ projeto.get_status_display }}
+                            </span>
+                        </td>
+                        <td class="price">R$ {{ projeto.valor_fechado }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-msg">Nenhum projeto cadastrado ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-
-        <nav class="menu-items">
-            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
-            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
-            <a href="{% url "criar-projeto" %}" class="active">📁 <span>Projetos</span></a>
-            <a href="#">👥 <span>Clientes</span></a>
-        </nav>
+    </section>
+        {% include "gestao/partials/_development.html" %}
     </div>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('aberta');
-        }
-    </script>
+    {% include "gestao/partials/_script.html" %}
 </body>
 </html>

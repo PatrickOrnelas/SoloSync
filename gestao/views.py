@@ -1,15 +1,34 @@
 from django.shortcuts import render
-from .models import Projeto
+from .models import Projeto, Cliente, Tarefa
 from django.db.models import Sum
 
+# View de inicio
 def index(request):
     return render(request=request, template_name='gestao/index.html')
 
+# Views relacionados com projetos
 def criar_projeto(request):
     return render(request=request, template_name='gestao/projetos.html')
 
+def listar_projetos(request):
+    projetos = Projeto.objects.all()
+    print(f"DEBUG: Encontrei {projetos.count()} projetos no banco de dados.")
+    context = {
+        'projetos' : projetos
+    }
+    return render(request=request, template_name='gestao/projetos.html', context=context)
+
+# Views relacionados com clientes
 def criar_cliente(request):
-    pass
+    return render(request=request, template_name='gestao/clientes.html')
+
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    print(f"DEBUG: Encontrei {clientes.count()} clientes no banco de dados.")
+    context = {
+        'clientes' : clientes
+    }
+    return render(request=request, template_name='gestao/clientes.html', context=context)
 
 
 def dashboard(request):
