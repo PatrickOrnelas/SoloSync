@@ -10,13 +10,66 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <h1>{{ projeto.titulo }}</h1>
-        <p><strong>Cliente:</strong> {{ projeto.cliente.nome }}</p>
-        <p><strong>Descrição:</strong> {{ projeto.descricao }}</p>
-        <p><strong>Prazo de Entrega:</strong> {{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
-        <p><strong>Status:</strong> {{ projeto.get_status_display }}</p>
-        <p><strong>Valor Fechado:</strong> R$ {{ projeto.valor_fechado }}</p>
-        <a href="{% url 'listar-projetos' %}">Voltar para a lista de projetos</a>
+        <header class="home-header">
+            <h1>Detalhes do Projeto</h1>
+            <p>Acompanhe as informações detalhadas do projeto selecionado.</p>  
+            <div class="header-actions">
+                <a href="#" class="btn btn-create">+ Criar Tarefa</a>
+                <a href="" class="btn btn-edit">Editar Projeto</a>
+                <a href="" class="btn btn-finish">Concluir Projeto</a>
+            </div>
+        </header>
+        <div class="project-details">
+            <div class="stats-grid">
+                <div class="stat-card total">
+                    <h3>Cliente</h3>
+                    <p class="value" style="font-size: 1.2rem;">{{ projeto.cliente.nome }}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Prazo Final</h3>
+                    <p class="value" style="font-size: 1.2rem;">{{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
+                </div>
+                <div class="stat-card active">
+                    <h3>Valor do Contrato</h3>
+                    <p class="value" style="font-size: 1.2rem;">R$ {{ projeto.valor_fechado }}</p>
+                </div>
+            </div>        
+            <h2 style="margin-top: 20px;">Tarefas:</h2>
+            <div class="table-container">               
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Descrição da Tarefa</th>
+                            <th>Data de Criação</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarefa in projeto.tarefas.all %}
+                        <tr>
+                            <td>{{ tarefa.descricao }}</td>
+                            <td>{{ tarefa.data_criacao|date:"d/m/Y H:i" }}</td>
+                            <td>{{ tarefa.get_status_display }}</td>
+                            <td>
+                                <a href="#" class="btn btn-edit">Editar</a>
+                                <a href="#" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="empty-msg">Nenhuma tarefa cadastrada para este projeto.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="detail-description welcome-card" style="text-align: left; margin-top: 0;">
+                <h3 style="margin-bottom: 10px;">Descrição do Projeto</h3>
+                <p>{{ projeto.descricao }}</p>
+            </div>
+        </div>
+        <a href="{% url 'listar-projetos' %}" class="btn btn-back">Voltar</a>
     </div>
     {% include "gestao/partials/_script.html" %}
 </body>

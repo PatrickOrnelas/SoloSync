@@ -15,11 +15,11 @@
                 <h1>Novo <span>Projeto</span></h1>
             </header>
 
-            <div class="welcome-card" style="text-align: left;">
+            <div class="form-card">
                 <form method="POST">
                     {% csrf_token %} {% for field in form %}
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; font-weight: 600;">{{ field.label }}</label>
+                        <div class="form-content">
+                            <label class="form-label">{{ field.label }}</label>
                             {{ field }}
                             {% if field.errors %}
                                 <span style="color: red; font-size: 0.8rem;">{{ field.errors }}</span>
@@ -27,8 +27,10 @@
                         </div>
                     {% endfor %}
 
-                    <button type="submit" class="btn-primary">Salvar Projeto</button>
-                    <a href="{% url 'listar-projetos' %}" style="margin-left: 10px; color: #64748b;">Cancelar</a>
+                    <div class="btn-group">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <a class="btn-cancelar" href="{% url 'listar-projetos' %}">Cancelar</a>
+                    </div>
                 </form>
             </div>
         </section>

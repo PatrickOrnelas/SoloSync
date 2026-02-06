@@ -43,8 +43,8 @@
                         </td>
                         <td class="price">R$ {{ projeto.valor_fechado }}</td>
                         <td>
-                            <a href="">Editar</a>
-                            <a href="{% url 'deletar-projeto' projeto.id %}" onclick="return confirm('Tem certeza que deseja deletar este projeto?')">Deletar</a>
+                            <a href="" class="btn btn-edit">Editar</a>
+                            <a href="{% url 'deletar-projeto' projeto.id %}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este projeto?')">Deletar</a>
                         </td>
                     </tr>
                     {% empty %}

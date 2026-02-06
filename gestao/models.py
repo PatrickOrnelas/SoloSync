@@ -36,7 +36,8 @@ class Projeto(models.Model):
 class Tarefa(models.Model):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE, related_name='tarefas')
     descricao = models.CharField(max_length=255)
-    concluida = models.BooleanField(default=False)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=Projeto.STATUS_CHOICES, default='planejamento')
 
     def __str__(self):
         return f"{self.projeto.titulo} - {self.descricao}"
