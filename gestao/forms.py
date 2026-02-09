@@ -57,10 +57,10 @@ class ClienteForm(forms.ModelForm):
                 raise forms.ValidationError('Por favor, insira um email válido.')
             return email
         
-class TarefasForm(forms.Form):
+class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
-        fields = ['titulo', 'descricao', 'data_criacao', 'status']
+        fields = ['titulo', 'descricao', 'status']
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'title-input', 'placeholder': 'Título da tarefa'}),
@@ -73,3 +73,16 @@ class TarefasForm(forms.Form):
             'descricao': 'Descrição da Tarefa',
             'status': 'Status da Tarefa',
         }
+
+        def clean(self):
+            cleaned_data = super().clean()
+            titulo = cleaned_data.get('titulo')
+            descricao = cleaned_data.get('descricao')
+
+            if titulo and len(titulo) < 5:
+                self.add_error('titulo', 'O título deve conter pelo menos 5 caracteres.')
+
+            if descricao and len(descricao) < 10:
+                self.add_error('descricao', 'A descrição deve conter pelo menos 10 caracteres.')
+
+            return cleaned_data

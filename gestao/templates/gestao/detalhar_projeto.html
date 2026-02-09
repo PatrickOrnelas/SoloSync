@@ -14,9 +14,9 @@
             <h1>Detalhes do Projeto</h1>
             <p>Acompanhe as informações detalhadas do projeto selecionado.</p>  
             <div class="header-actions">
-                <a href="#" class="btn btn-create">+ Criar Tarefa</a>
-                <a href="" class="btn btn-edit">Editar Projeto</a>
-                <a href="" class="btn btn-finish">Concluir Projeto</a>
+                <a href="{% url "criar-tarefa" projeto.id %}" class="btn btn-create">+ Criar Tarefa</a>
+                <a href="{% url 'editar-projeto' projeto.id %}" class="btn btn-edit">Editar Projeto</a>
+                <a href="{% url 'concluir-projeto' projeto.id %}" class="btn btn-finish">Concluir Projeto</a>
             </div>
         </header>
         <div class="project-details">
@@ -39,6 +39,7 @@
                 <table class="custom-table">
                     <thead>
                         <tr>
+                            <th>Título</th>
                             <th>Descrição da Tarefa</th>
                             <th>Data de Criação</th>
                             <th>Status</th>
@@ -48,12 +49,13 @@
                     <tbody>
                         {% for tarefa in projeto.tarefas.all %}
                         <tr>
+                            <td><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></td>
                             <td>{{ tarefa.descricao }}</td>
                             <td>{{ tarefa.data_criacao|date:"d/m/Y H:i" }}</td>
                             <td>{{ tarefa.get_status_display }}</td>
                             <td>
-                                <a href="#" class="btn btn-edit">Editar</a>
-                                <a href="#" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
+                                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">Editar</a>
+                                <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
                             </td>
                         </tr>
                         {% empty %}

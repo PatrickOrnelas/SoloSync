@@ -3,21 +3,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Novo Projeto - SoloSync</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Tarefa</title>
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
     {% include "gestao/partials/_sidebar.html" %}
-    
     <div class="main-content">
         <section class="form-section">
             <header class="dashboard-header">
-                <h1>Novo <span>Projeto</span></h1>
+                <h1>Criar <span>Tarefa</span></h1>
             </header>
 
             <div class="form-card">
                 <form method="POST">
-                    {% csrf_token %} {% for field in form %}
+                    {% csrf_token %}
+                    {% for field in form %}
                         <div class="form-content">
                             <label class="form-label">{{ field.label }}</label>
                             {{ field }}
@@ -26,15 +27,14 @@
                             {% endif %}
                         </div>
                     {% endfor %}
-
                     <div class="btn-group">
                         <button type="submit" class="btn-salvar">Salvar</button>
-                        <a class="btn-cancelar" href="{% url 'listar-projetos' %}">Cancelar</a>
+                        <a class="btn-cancelar" href="{% url 'detalhar-projeto' projeto.id %}">Cancelar</a>
                     </div>
                 </form>
             </div>
         </section>
-    </div>
+    </div> 
     {% include "gestao/partials/_script.html" %}
 </body>
 </html>

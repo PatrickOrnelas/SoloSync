@@ -2,14 +2,13 @@ from pyexpat.errors import messages
 from django.shortcuts import redirect, render
 from .models import Projeto, Cliente, Tarefa
 from django.db.models import Sum
-from .forms import ProjetoForm
+from .forms import ProjetoForm, TarefaForm, ClienteForm
 
 # View de inicio
 def index(request):
     return render(request=request, template_name='gestao/index.html')
 
 # Views relacionados com projetos
-
 def listar_projetos(request):
     projetos = Projeto.objects.all()
     print(f"DEBUG: Encontrei {projetos.count()} projetos no banco de dados.")
@@ -45,6 +44,81 @@ def deletar_projeto(request, projeto_id):
     projeto.delete()
     return redirect('listar-projetos')
 
+def editar_projeto(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST, instance=projeto)
+        if form.is_valid():
+            form.save()
+            return redirect('listar-projetos')
+        else:
+            print('DEBUG: Formulário inválido ao editar projeto.')
+    else:
+        form = ProjetoForm(instance=projeto)
+    context = {
+        'form' : form,
+        'projeto' : projeto
+    }
+    return render(request=request, template_name='gestao/criar_projeto.html', context=context)
+
+def concluir_projeto(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    projeto.status = 'concluido'
+    projeto.save()
+    return redirect('listar-projetos')
+
+# Views relacionados com tarefas
+def criar_tarefa(request, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            tarefa = form.save(commit=False)
+            tarefa.projeto = projeto
+            tarefa.save()
+            return redirect('detalhar-projeto', projeto_id=projeto_id)
+    else:
+        form = TarefaForm()
+    context = {
+        'form' : form,
+        'projeto' : projeto
+    }
+    return render(request=request, template_name='gestao/criar_tarefa.html', context=context)
+
+def deletar_tarefa(request, tarefa_id):
+    tarefa = Tarefa.objects.get(id=tarefa_id)
+    projeto_id = tarefa.projeto.id
+    tarefa.delete()
+    return redirect('detalhar-projeto', projeto_id=projeto_id)
+
+def editar_tarefa(request, tarefa_id):
+    tarefa = Tarefa.objects.get(id=tarefa_id)
+    projeto_id = tarefa.projeto.id
+    
+    if request.method == 'POST':
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('detalhar-projeto', projeto_id=projeto_id)
+        else:
+            print('DEBUG: Formulário inválido ao editar tarefa.')
+    else:
+        form = TarefaForm(instance=tarefa)
+    context = {
+        'form' : form,
+        'tarefa' : tarefa,
+        'projeto' : tarefa.projeto
+    }
+    return render(request=request, template_name='gestao/criar_tarefa.html', context=context)
+
+def detalhar_tarefa(request, tarefa_id):
+    tarefa = Tarefa.objects.get(id=tarefa_id)
+    context = {
+        'tarefa' : tarefa
+    }
+    return render(request=request, template_name='gestao/detalhar_tarefa.html', context=context)
+
 # Views relacionados com clientes
 def criar_cliente(request):
     return render(request=request, template_name='gestao/clientes.html')
@@ -57,7 +131,7 @@ def listar_clientes(request):
     }
     return render(request=request, template_name='gestao/clientes.html', context=context)
 
-
+# View do Dashboard
 def dashboard(request):
     # Consulta todos os projetos
     projetos = Projeto.objects.all()

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhar Tarefa</title>
+    <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
+</head>
+<body>
+    {% include "gestao/partials/_sidebar.html" %}
+    <div class="main-content">
+        <header class="home-header">
+            <h1>Detalhes da Tarefa</h1>
+            <p>Acompanhe as informações detalhadas da tarefa selecionada.</p>  
+        </header>
+        <div class="detail-description welcome-card" style="text-align: left; margin-top: 0;">
+            <h3 style="margin-bottom: 10px;">Descrição da Tarefa</h3>
+            <p>{{ tarefa.descricao }}</p>
+        </div>
+        <a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="btn btn-back">Voltar</a>
+    </div>
+    {% include "gestao/partials/_script.html" %}
+</body>
+</html>
