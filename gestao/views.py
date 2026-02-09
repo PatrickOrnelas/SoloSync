@@ -120,9 +120,6 @@ def detalhar_tarefa(request, tarefa_id):
     return render(request=request, template_name='gestao/detalhar_tarefa.html', context=context)
 
 # Views relacionados com clientes
-def criar_cliente(request):
-    return render(request=request, template_name='gestao/clientes.html')
-
 def listar_clientes(request):
     clientes = Cliente.objects.all()
     print(f"DEBUG: Encontrei {clientes.count()} clientes no banco de dados.")
@@ -130,6 +127,49 @@ def listar_clientes(request):
         'clientes' : clientes
     }
     return render(request=request, template_name='gestao/clientes.html', context=context)
+
+def criar_clientes(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar-clientes')
+    else:
+        form = ClienteForm()
+    context = {
+        'form': form
+    }
+    return render(request=request, template_name='gestao/criar_clientes.html', context=context)
+
+def detalhar_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+    context = {
+        'cliente' : cliente
+    }
+    return render(request=request, template_name='gestao/detalhar_cliente.html', context=context)
+
+def deletar_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+    cliente.delete()
+    return redirect('listar-clientes')
+
+def editar_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect('detalhar-cliente', cliente_id=cliente_id)
+        else:
+            print('DEBUG: Formulário inválido ao editar cliente.')
+    else:
+        form = ClienteForm(instance=cliente)
+    context = {
+        'form' : form,
+        'cliente' : cliente
+    }
+    return render(request=request, template_name='gestao/criar_clientes.html', context=context)
 
 # View do Dashboard
 def dashboard(request):

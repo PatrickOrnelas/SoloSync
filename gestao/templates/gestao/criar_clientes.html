@@ -3,16 +3,16 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>SoloSync - Novo Projeto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoloSync - Criar Cliente</title>
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
     {% include "gestao/partials/_sidebar.html" %}
-    
     <div class="main-content">
         <section class="form-section">
             <header class="dashboard-header">
-                <h1>Novo <span>Projeto</span></h1>
+                <h1>Novo <span>Cliente</span></h1>
             </header>
 
             <div class="form-card">
@@ -26,10 +26,9 @@
                             {% endif %}
                         </div>
                     {% endfor %}
-
                     <div class="btn-group">
                         <button type="submit" class="btn-salvar">Salvar</button>
-                        <a class="btn-cancelar" href="{% url 'listar-projetos' %}">Cancelar</a>
+                        <a class="btn-cancelar" href="{% url 'listar-clientes' %}">Cancelar</a>
                     </div>
                 </form>
             </div>

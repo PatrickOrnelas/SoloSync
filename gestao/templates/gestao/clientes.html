@@ -4,33 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes - SoloSync</title>
+    <title>SoloSync - Clientes</title>
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <h1>Clientes</h1>
-        <p>Aqui você pode visualizar e gerenciar os clientes da sua empresa.</p>
+        <div class="home-header">
+            <h1>Clientes</h1>
+            <p>Aqui você pode visualizar e gerenciar os clientes da sua empresa.</p>
+            <div class="header-actions">
+                <a href="{% url "criar-cliente" %}" class="btn-primary">+ Adicionar Cliente</a>
+            </div>
+        </div>
         <section class="clients-section">
             <h3>Seus Clientes</h3>
             <div class="table-container">
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>Nome do Cliente</th>
+                            <th>Qnt. de Projetos</th>
                             <th>Email</th>
                             <th>Telefone</th>
                             <th>Empresa</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for cliente in clientes  %}
                         <tr>
-                            <td class="font-bold"><a href="">{{ cliente.nome }}</a></td>
+                            <td class="font-bold"><a href="{% url "detalhar-cliente" cliente.id %}">{{ cliente.nome }}</a></td>
+                            <td>{{ cliente.projetos.count }}</td>
                             <td>{{ cliente.email }}</td>
                             <td>{{ cliente.telefone }}</td>
                             <td>{{ cliente.empresa }}</td>
+                            <td>
+                                <a href="{% url "editar-cliente" cliente.id %}" class="btn btn-edit">Editar</a>
+                                <a href="{% url "deletar-cliente" cliente.id %}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja remover este cliente:')">Remover</a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -38,7 +50,6 @@
             </div>
         </section>
     </div>
-    {% include "gestao/partials/_development.html" %}
     {% include "gestao/partials/_script.html" %}
 </body>
 </html>

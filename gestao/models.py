@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 class Cliente(models.Model):
     # Relaciona o cliente ao usuário que o cadastrou
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)
