@@ -8,16 +8,62 @@
     <link rel="stylesheet" href="{% static 'gestao/css/style.css' %}">
 </head>
 <body class="home-body">
-
     {% include "gestao/partials/_sidebar.html" %}
-
     <div class="main-content">
         <header class="home-header">
-            <h1>Bem-vindo ao <span>SoloSync</span>!</h1>
+            <h1>Bem-vindo ao Solo<span>Sync</span>!</h1>
             <p>Sua central de controle freelancer.</p>
         </header>
-
-        {% include "gestao/partials/_development.html" %}
+        <section class="home-cards">
+            <div class="home-card">
+                <h2>📁 Meus Projetos</h2>
+                <p>Gerencie seus projetos e acompanhe o progresso.</p>
+                <a href="{% url 'listar-projetos' %}" class="btn">Ver Projetos</a>
+            </div>
+            <div class="home-card">
+                <h2>👥 Meus Clientes</h2>
+                <p>Organize seus clientes e mantenha contato facilmente.</p>
+                <a href="{% url 'listar-clientes' %}" class="btn">Ver Clientes</a>
+            </div>
+            <div class="home-card">
+                <h2>📊 Dashboard</h2>
+                <p>Acompanhe suas finanças e desempenho em tempo real.</p>
+                <a href="{% url 'dashboard' %}" class="btn">Ver Dashboard</a>
+            </div>
+        </section>
+        <h2 style="text-align: center; margin-top: 40px;">Lista de Afazeres</h2>
+        <div class="to-do-list">
+            <div class="planning-card">
+                <h3>Planejamento</h3>
+                <ul>
+                    {% for tarefa in tarefas_em_planejamento %}
+                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    {% empty %}
+                    <li>Nenhuma tarefa em planejamento.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="in-progress-card">
+                <h3>Em Andamento</h3>
+                <ul>
+                    {% for tarefa in tarefas_em_andamento %}
+                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    {% empty %}
+                    <li>Nenhuma tarefa em andamento.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="completed-card">
+                <h3>Concluídas</h3>
+                <ul>
+                    {% for tarefa in tarefas_concluidas %}
+                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    {% empty %}
+                    <li>Nenhuma tarefa concluída.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 
     {% include "gestao/partials/_script.html" %}

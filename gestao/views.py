@@ -6,7 +6,20 @@ from .forms import ProjetoForm, TarefaForm, ClienteForm
 
 # View de inicio
 def index(request):
-    return render(request=request, template_name='gestao/index.html')
+    tarefas = Tarefa.objects.all()
+    tarefas_em_planejamento = tarefas.filter(status='planejamento')
+    tarefas_em_andamento = tarefas.filter(status='em_andamento')
+    tarefas_concluidas = tarefas.filter(status='concluido')
+    projeto = Projeto.objects.first()  # Pega o primeiro projeto para exibir as tarefas relacionadas
+    print(f"DEBUG: Encontrei {tarefas.count()} tarefas no banco de dados.")
+    context = {
+        'tarefas': tarefas,
+        'tarefas_em_planejamento': tarefas_em_planejamento,
+        'tarefas_em_andamento': tarefas_em_andamento,
+        'tarefas_concluidas': tarefas_concluidas,
+        'projeto': projeto
+    }
+    return render(request=request, template_name='gestao/index.html', context=context)
 
 # Views relacionados com projetos
 def listar_projetos(request):
