@@ -113,7 +113,7 @@ def editar_tarefa(request, tarefa_id):
         form = TarefaForm(request.POST, instance=tarefa)
         if form.is_valid():
             form.save()
-            return redirect('detalhar-projeto', projeto_id=projeto_id)
+            return redirect('detalhar-tarefa', tarefa_id=tarefa.id)
         else:
             print('DEBUG: Formulário inválido ao editar tarefa.')
     else:

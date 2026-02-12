@@ -49,11 +49,11 @@
                     <tbody>
                         {% for tarefa in projeto.tarefas.all %}
                         <tr>
-                            <td><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></td>
+                            <td><strong><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></strong></td>
                             <td>{{ tarefa.descricao }}</td>
                             <td>{{ tarefa.data_criacao|date:"d/m/Y H:i" }}</td>
                             <td>{{ tarefa.get_status_display }}</td>
-                            <td>
+                            <td class="actions">
                                 <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">Editar</a>
                                 <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
                                 <a href="{% url "concluir-tarefa" tarefa.id projeto.id %}" class="btn btn-finish">Concluir</a>

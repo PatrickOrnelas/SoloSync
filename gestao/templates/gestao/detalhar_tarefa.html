@@ -14,11 +14,58 @@
             <h1>Detalhes da Tarefa</h1>
             <p>Acompanhe as informações detalhadas da tarefa selecionada.</p>  
         </header>
-        <div class="detail-description welcome-card" style="text-align: left; margin-top: 0;">
-            <h3 style="margin-bottom: 10px;">Descrição da Tarefa</h3>
-            <p>{{ tarefa.descricao }}</p>
+
+        <!-- Card Principal -->
+        <div class="detail-card welcome-card">
+            <div class="detail-header">
+                <h2>{{ tarefa.titulo }}</h2>
+                <div class="detail-status">
+                    <span class="status-badge status-{{ tarefa.status }}">
+                        {% if tarefa.status == 'planejamento' %}
+                            Planejamento
+                        {% elif tarefa.status == 'em_andamento' %}
+                            Em Andamento
+                        {% elif tarefa.status == 'concluido' %}
+                            Concluído
+                        {% elif tarefa.status == 'cancelado' %}
+                            Cancelado
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Informações Principais -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Data de Criação</label>
+                    <p>{{ tarefa.data_criacao|date:"d \d\e F \d\e Y \à\s H:i" }}</p>
+                </div>
+                <div class="info-item">
+                    <label>Projeto</label>
+                    <p><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="link-projeto">{{ tarefa.projeto.titulo }}</a></p>
+                </div>
+            </div>
+
+            <!-- Descrição -->
+            <div class="detail-description">
+                <h3>Descrição da Tarefa</h3>
+                <p>{{ tarefa.descricao }}</p>
+            </div>
+
+            <!-- Ações -->
+            <div class="action-buttons">
+                {% if tarefa.status != 'concluido' %}
+                    <a href="{% url 'concluir-tarefa' tarefa.id tarefa.projeto.id %}" class="btn btn-success">Concluir Tarefa</a>
+                {% endif %}
+                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-primary">Editar</a>
+                <button onclick="if(confirm('Tem certeza que deseja deletar essa tarefa?')) window.location.href='{% url 'deletar-tarefa' tarefa.id %}';" class="btn btn-delete">Deletar</button>
+            </div>
         </div>
-        <a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="btn btn-back">Voltar</a>
+
+        <!-- Botão Voltar -->
+        <div class="back-button-container">
+            <a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="btn btn-back">Voltar</a>
+        </div>
     </div>
     {% include "gestao/partials/_script.html" %}
 </body>
