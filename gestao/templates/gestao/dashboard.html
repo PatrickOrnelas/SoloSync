@@ -66,7 +66,7 @@
                 {% for p in prazos_criticos %}
                 <li style="padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
                     <span style="display: block; font-size: 0.8rem; color: #64748b;">Vence em: {{ p.prazo_entrega|date:"d/m" }}</span>
-                    <strong style="color: var(--dark);">{{ p.titulo }}</strong>
+                    <strong style="color: projeto.idvar(--dark);">{{ p.titulo }}</strong>
                 </li>
                 {% empty %}
                 <p style="color: var(--success); font-size: 0.9rem;">Tudo em dia por aqui! ✅</p>

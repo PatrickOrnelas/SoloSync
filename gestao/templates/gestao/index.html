@@ -10,58 +10,59 @@
 <body class="home-body">
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <header class="home-header">
+        <header class="header-card">
             <h1>Bem-vindo ao Solo<span>Sync</span>!</h1>
             <p>Sua central de controle freelancer.</p>
         </header>
         <section class="home-cards">
-            <div class="home-card">
+            <div class="card">
                 <h2>📁 Meus Projetos</h2>
                 <p>Gerencie seus projetos e acompanhe o progresso.</p>
                 <a href="{% url 'listar-projetos' %}" class="btn">Ver Projetos</a>
             </div>
-            <div class="home-card">
+            <div class="card">
                 <h2>👥 Meus Clientes</h2>
                 <p>Organize seus clientes e mantenha contato facilmente.</p>
                 <a href="{% url 'listar-clientes' %}" class="btn">Ver Clientes</a>
             </div>
-            <div class="home-card">
+            <div class="card">
                 <h2>📊 Dashboard</h2>
                 <p>Acompanhe suas finanças e desempenho em tempo real.</p>
                 <a href="{% url 'dashboard' %}" class="btn">Ver Dashboard</a>
             </div>
         </section>
-        <h2 style="text-align: center; margin-top: 40px;">Lista de Afazeres</h2>
-        <div class="to-do-list">
-            <div class="planning-card">
-                <h3 style="color: #6366f1;">Planejamento</h3>
-                <ul class="card-list">
-                    {% for tarefa in tarefas_em_planejamento %}
-                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
-                    {% empty %}
-                    <li>Nenhuma tarefa em planejamento.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="in-progress-card">
-                <h3 style="color: #f59e0b;">Em Andamento</h3>
-                <ul class="card-list">
-                    {% for tarefa in tarefas_em_andamento %}
-                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
-                    {% empty %}
-                    <li>Nenhuma tarefa em andamento.</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="completed-card">
-                <h3 style="color: #22c55e;">Concluídas</h3>
-                <ul class="card-list">
-                    {% for tarefa in tarefas_concluidas %}
-                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
-                    {% empty %}
-                    <li>Nenhuma tarefa concluída.</li>
-                    {% endfor %}
-                </ul>
+            <h2 style="text-align: center; font-size: 30px; margin-top: 30px; margin-bottom: 10px;">Lista de Tarefas</h2>
+            <div class="task-cards">
+                <div class="planning-card">
+                    <h3 class="task-card-title" style="color: #6366f1;">Planejamento</h3>
+                    <ul class="task-list">
+                        {% for tarefa in tarefas_em_planejamento %}
+                        <li class="task-item"><a class="task-link" href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
+                        {% empty %}
+                        <li>Nenhuma tarefa em planejamento.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="in-progress-card">
+                    <h3 class="task-card-title" style="color: #f59e0b;">Em Andamento</h3>
+                    <ul class="task-list">
+                        {% for tarefa in tarefas_em_andamento %}
+                        <li class="task-item"><a class="task-link" href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
+                        {% empty %}
+                        <li>Nenhuma tarefa em andamento.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="completed-card">
+                    <h3 class="task-card-title" style="color: #22c55e;">Concluídas</h3>
+                    <ul class="task-list">
+                        {% for tarefa in tarefas_concluidas %}
+                        <li class="task-item"><a class="task-link" href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
+                        {% empty %}
+                        <li>Nenhuma tarefa concluída.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
