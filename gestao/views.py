@@ -132,6 +132,13 @@ def detalhar_tarefa(request, tarefa_id):
     }
     return render(request=request, template_name='gestao/detalhar_tarefa.html', context=context)
 
+def concluir_tarefa(request, tarefa_id, projeto_id):
+    projeto = Projeto.objects.get(id=projeto_id)
+    tarefa = Tarefa.objects.get(id=tarefa_id)
+    tarefa.status = 'concluido'
+    tarefa.save()
+    return redirect('detalhar-projeto', projeto_id=projeto_id)
+
 # Views relacionados com clientes
 def listar_clientes(request):
     clientes = Cliente.objects.all()

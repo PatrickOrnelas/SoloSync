@@ -56,6 +56,7 @@
                             <td>
                                 <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">Editar</a>
                                 <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
+                                <a href="{% url "concluir-tarefa" tarefa.id projeto.id %}" class="btn btn-finish">Concluir</a>
                             </td>
                         </tr>
                         {% empty %}

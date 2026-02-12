@@ -21,7 +21,7 @@ urlpatterns = [
     path('tarefas/<int:tarefa_id>/', views.detalhar_tarefa, name='detalhar-tarefa'),
     path('tarefas/<int:tarefa_id>/deletar/', views.deletar_tarefa, name='deletar-tarefa'),
     path('tarefas/<int:tarefa_id>/editar/', views.editar_tarefa, name='editar-tarefa'),
-    # path('tarefas/<int:tarefa_id>/concluir/', views.concluir_tarefa, name='concluir-tarefa'),
+    path('tarefas/<int:tarefa_id>/projetos/<int:projeto_id>/concluir/', views.concluir_tarefa, name='concluir-tarefa'),
 
     # URLs para Clientes
     path('clientes/', views.listar_clientes, name='listar-clientes'),

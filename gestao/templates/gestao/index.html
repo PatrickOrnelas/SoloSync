@@ -34,30 +34,30 @@
         <h2 style="text-align: center; margin-top: 40px;">Lista de Afazeres</h2>
         <div class="to-do-list">
             <div class="planning-card">
-                <h3>Planejamento</h3>
-                <ul>
+                <h3 style="color: #6366f1;">Planejamento</h3>
+                <ul class="card-list">
                     {% for tarefa in tarefas_em_planejamento %}
-                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
                     {% empty %}
                     <li>Nenhuma tarefa em planejamento.</li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="in-progress-card">
-                <h3>Em Andamento</h3>
-                <ul>
+                <h3 style="color: #f59e0b;">Em Andamento</h3>
+                <ul class="card-list">
                     {% for tarefa in tarefas_em_andamento %}
-                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
                     {% empty %}
                     <li>Nenhuma tarefa em andamento.</li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="completed-card">
-                <h3>Concluídas</h3>
-                <ul>
+                <h3 style="color: #22c55e;">Concluídas</h3>
+                <ul class="card-list">
                     {% for tarefa in tarefas_concluidas %}
-                    <li>{{ tarefa.projeto.titulo }} - {{ tarefa.descricao }}</li>
+                    <li><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}"><strong>{{ tarefa.projeto.titulo }}</strong></a> - {{ tarefa.descricao }}</li>
                     {% empty %}
                     <li>Nenhuma tarefa concluída.</li>
                     {% endfor %}
