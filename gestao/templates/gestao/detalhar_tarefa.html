@@ -21,15 +21,7 @@
                 <h2>{{ tarefa.titulo }}</h2>
                 <div class="detail-status">
                     <span class="status-badge status-{{ tarefa.status }}">
-                        {% if tarefa.status == 'planejamento' %}
-                            Planejamento
-                        {% elif tarefa.status == 'em_andamento' %}
-                            Em Andamento
-                        {% elif tarefa.status == 'concluido' %}
-                            Concluído
-                        {% elif tarefa.status == 'cancelado' %}
-                            Cancelado
-                        {% endif %}
+                        {{ tarefa.get_status_display }}
                     </span>
                 </div>
             </div>

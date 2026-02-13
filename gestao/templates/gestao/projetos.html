@@ -10,14 +10,14 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <header class="home-header">
+        <header class="header-card">
             <h1>Projetos</h1>
             <p>Gerencie seus projetos e acompanhe o progresso de cada um.</p>
-            <div class="header-actions">
-                <a href="{% url 'criar-projeto' %}" class="btn-primary">+ Novo Projeto</a>
-            </div>
         </header>
-        <h3>Seus Projetos</h3>
+        <div class="table-header">
+            <h2>Meus Projetos</h2>
+            <a href="{% url 'criar-projeto' %}" class="btn btn-primary">+ Novo Projeto</a>
+        </div>
         <div class="table-container">
             <table class="custom-table">
                 <thead>
@@ -37,14 +37,14 @@
                         <td>{{ projeto.cliente.nome }}</td>
                         <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
                         <td>
-                            <span class="status-badge {{ projeto.status }}">
+                            <span class="status-badge status-{{ projeto.status }}">
                                 {{ projeto.get_status_display }}
                             </span>
                         </td>
                         <td class="price">R$ {{ projeto.valor_fechado }}</td>
-                        <td>
-                            <a href="{% url 'editar-projeto' projeto.id %}" class="btn btn-edit">Editar</a>
-                            <a href="{% url 'deletar-projeto' projeto.id %}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja deletar este projeto?')">Deletar</a>
+                        <td class="actions">
+                            <a href="{% url 'editar-projeto' projeto.id %}">{% load static %} <img src="{% static 'gestao/img/edit.png' %}" alt="Btn Editar"></a>
+                            <a href="{% url 'deletar-projeto' projeto.id %}" class="btn-delete" onclick="return confirm('Tem certeza que deseja deletar este projeto?')">{% load static %} <img src="{% static 'gestao/img/delete.png' %}" alt="Btn Deletar"></a>
                         </td>
                     </tr>
                     {% empty %}

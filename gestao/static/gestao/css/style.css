@@ -9,6 +9,7 @@
     --error: #ef4444;
     --warning: #f59e0b;
     --gradient: linear-gradient(135deg, var(--primary) 0%, #8b46e5 100%);
+    --table-header-bg: #e0e0e0;
 }
 
 * {
@@ -44,7 +45,7 @@ p {
 .header-card {
     color: var(--white);
     font-size: 20px;
-    padding: 50px;
+    padding: 35px;
     background: var(--gradient);
     border-radius: 20px;
     text-align: left;
@@ -88,7 +89,108 @@ p {
 }
 
 .header-actions {
-    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 30px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.custom-table thead {
+    background: var(--table-header-bg);
+}
+
+.custom-table th{
+    padding: 18px 20px;
+    text-align: left;
+    text-transform: uppercase; /* Transforma em caixa alta */
+    letter-spacing: 2px; /* Espaçamento entre as letras */
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: #475569;
+}
+
+.custom-table td {
+    padding: 18px 20px;
+    text-align: left;
+    border-top: 1px solid #f1f5f9; /* Linha de separação entre as linhas */
+    color: var(--text-main);
+}
+
+/* Cores dos status - dinamicamente mapeadas via classe status-{{ status }} */
+.status-badge.status-planejamento {
+    padding: 8px 16px;
+    font-size: small;
+    background-color: #e0e7ff;
+    color: #4f46e5;
+}
+
+.status-badge.status-em_andamento {
+    padding: 8px 16px;
+    font-size: small;
+    background-color: #fef3c7;
+    color: var(--warning);
+}
+
+.status-badge.status-concluido {
+    padding: 8px 16px;
+    font-size: small;
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.status-badge.status-cancelado {
+    padding: 8px 16px;
+    font-size: small;
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.custom-table .price {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.custom-table .actions {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+}
+
+.font-bold a{
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.font-bold a:hover {
+    color: #4f46e5;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.5s ease;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
 }
 
 /* Header */
@@ -153,53 +255,6 @@ p {
     margin-bottom: 20px;
 }
 
-.custom-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.custom-table th {
-    background: #f1f5f9;
-    padding: 15px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #475569;
-}
-
-.custom-table td {
-    padding: 15px;
-    border-top: 1px solid #f1f5f9;
-}
-
-.font-bold {
-    font-weight: 600;
-    color: var(--dark);
-}
-
-.price {
-    color: var(--success);
-    font-weight: 600;
-}
-
-/* Badges de Status */
-.status-badge {
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    background: #e2e8f0;
-}
-
-.status-badge.em_execucao {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.status-badge.concluido {
-    background: #dbeafe;
-    color: #1e40af;
-}
 
 /* Configurações da Sidebar */
 .sidebar {
@@ -446,190 +501,6 @@ select:hover {
     min-width: 150px;
 }
 
-/* Botões Modernizados */
-.btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.btn-primary,
-.btn {
-    background: var(--primary);
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: var(--white);
-    text-decoration: none;
-}
-
-.btn-primary:hover,
-.btn:hover {
-    background: #4f46e5;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-primary:active,
-.btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
-}
-
-.btn-secondary {
-    background: #94a3b8;
-    color: var(--white);
-}
-
-.btn-secondary:hover {
-    background: #64748b;
-    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-success {
-    background: var(--success);
-    color: var(--white);
-}
-
-.btn-success:hover {
-    background: #16a34a;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-    transform: translateY(-2px);
-}
-
-/* Compatibilidade com botões antigos */
-.btn-salvar {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 13px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;   
-}
-
-.btn-cancelar {
-    color: var(--white);
-    background-color: var(--error);
-    padding: 10px 20px;
-    border: 2px solid var(--error);
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.btn-delete{
-    color: var(--white);
-    background-color: var(--error);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btn-delete:hover {
-    background-color: #dc2626;
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-edit {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btn-edit:hover {
-    background-color: #4f46e5;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-back {
-    background-color: #94a3b8;
-    color: var(--white);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-    margin-top: 20px;
-    width: 100px;
-     text-align: center;
-}
-
-.btn-back:hover {
-    background-color: #64748b;
-    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-create{
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;;
-}
-
-.btn-create:hover {
-    background-color: #4f46e5;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-finish {
-    background-color: var(--success);
-    color: var(--white);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.btn-finish:hover {
-    background-color: #16a34a;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
-    transform: translateY(-2px);
-}
-
-.btn-edit {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btn-edit:hover {
-    background-color: #4f46e5;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-    transform: translateY(-2px);
-}
-
 
 @keyframes loading {
     0% {
@@ -741,26 +612,6 @@ select:hover {
     border-radius: 20px;
     font-weight: 600;
     font-size: 0.9rem;
-}
-
-.status-badge.status-planejamento {
-    background-color: #e0e7ff;
-    color: #4f46e5;
-}
-
-.status-badge.status-em_andamento {
-    background-color: #fef3c7;
-    color: #d97706;
-}
-
-.status-badge.status-concluido {
-    background-color: #dcfce7;
-    color: #16a34a;
-}
-
-.status-badge.status-cancelado {
-    background-color: #fee2e2;
-    color: #dc2626;
 }
 
 .info-grid {

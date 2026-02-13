@@ -10,32 +10,35 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <header class="home-header">
+        <header class="header-card">
             <h1>Detalhes do Projeto</h1>
             <p>Acompanhe as informações detalhadas do projeto selecionado.</p>  
-            <div class="header-actions">
-                <a href="{% url "criar-tarefa" projeto.id %}" class="btn btn-create">+ Criar Tarefa</a>
-                <a href="{% url 'editar-projeto' projeto.id %}" class="btn btn-edit">Editar Projeto</a>
-                <a href="{% url 'concluir-projeto' projeto.id %}" class="btn btn-finish">Concluir Projeto</a>
-            </div>
         </header>
+        <div class="header-actions">
+                <a href="{% url 'editar-projeto' projeto.id %}" class="btn btn-edit">{% load static %}<img src="{% static 'gestao/img/edit.png' %}" alt="Editar Projeto"> Editar Projeto</a>
+                <a href="{% url "deletar-projeto" projeto.id %}" onclick="return confirm('Tem certeza que deseja deletar este projeto?')" class="btn btn-delete">{% load static %}<img src="{% static 'gestao/img/delete.png' %}" alt="Deletar Projeto"> Deletar Projeto</a>
+                <a href="{% url 'concluir-projeto' projeto.id %}" class="btn btn-finish">{% load static %}<img src="{% static 'gestao/img/finish.png' %}" alt="Concluir Projeto"> Concluir Projeto</a>
+        </div>
         <div class="project-details">
             <div class="stats-grid">
                 <div class="stat-card total">
                     <h3>Cliente</h3>
-                    <p class="value" style="font-size: 1.2rem;">{{ projeto.cliente.nome }}</p>
+                    <p class="value">{{ projeto.cliente.nome }}</p>
                 </div>
                 <div class="stat-card">
                     <h3>Prazo Final</h3>
-                    <p class="value" style="font-size: 1.2rem;">{{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
+                    <p class="value">{{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
                 </div>
                 <div class="stat-card active">
                     <h3>Valor do Contrato</h3>
-                    <p class="value" style="font-size: 1.2rem;">R$ {{ projeto.valor_fechado }}</p>
+                    <p class="value">R$ {{ projeto.valor_fechado }}</p>
                 </div>
             </div>        
-            <h2 style="margin-top: 20px;">Tarefas:</h2>
-            <div class="table-container">               
+            <div class="table-header">
+                <h2 class="table-title">Tarefas</h2>
+                <a href="{% url "criar-tarefa" projeto.id %}" class="btn btn-primary">+ Criar Tarefa</a>
+            </div>
+            <div class="table-container">
                 <table class="custom-table">
                     <thead>
                         <tr>
@@ -49,14 +52,14 @@
                     <tbody>
                         {% for tarefa in projeto.tarefas.all %}
                         <tr>
-                            <td><strong><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></strong></td>
+                            <td  class="font-bold"><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></td>
                             <td>{{ tarefa.descricao }}</td>
                             <td>{{ tarefa.data_criacao|date:"d/m/Y H:i" }}</td>
-                            <td>{{ tarefa.get_status_display }}</td>
+                            <td><span class="status-badge status-{{ tarefa.status }}">{{ tarefa.get_status_display }}</span></td>
                             <td class="actions">
-                                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">Editar</a>
-                                <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">Deletar</a>
-                                <a href="{% url "concluir-tarefa" tarefa.id projeto.id %}" class="btn btn-finish">Concluir</a>
+                                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">{% load static %} <img src="{% static 'gestao/img/edit.png' %}" alt="Btn Editar"></a>
+                                <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">{% load static %} <img src="{% static 'gestao/img/delete.png' %}" alt="Btn Deletar"></a>
+                                <a href="{% url "concluir-tarefa" tarefa.id projeto.id %}" class="btn btn-finish">{% load static %} <img src="{% static 'gestao/img/finish.png' %}" alt="Btn Concluir"></a>
                             </td>
                         </tr>
                         {% empty %}

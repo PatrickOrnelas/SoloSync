@@ -46,7 +46,7 @@
                     {% for projeto in projetos|slice:":5" %}
                     <tr>
                         <td class="font-bold">{{ projeto.titulo }}</td>
-                        <td><span class="status-badge {{ projeto.status }}">{{ projeto.get_status_display }}</span></td>
+                        <td><span class="status-badge status-{{ projeto.status }}">{{ projeto.get_status_display }}</span></td>
                         <td class="price">R$ {{ projeto.valor_fechado }}</td>
                     </tr>
                     {% empty %}
