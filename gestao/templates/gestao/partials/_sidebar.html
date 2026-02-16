@@ -6,9 +6,9 @@
         </div>
 
         <nav class="menu-items">
-            <a href="{% url 'index' %}">🏠 <span>Home</span></a>
-            <a href="{% url 'dashboard' %}">📊 <span>Dashboard</span></a>
-            <a href="{% url "listar-projetos" %}">📁 <span>Projetos</span></a>
-            <a href="{% url "listar-clientes" %}">👥 <span>Clientes</span></a>
+            <a href="{% url 'index' %}">{% load static %} <img src="{% static "gestao/img/home.png" %}" alt="Home Page"> <span>Home</span></a>
+            <a href="{% url 'dashboard' %}">{% load static %} <img src="{% static "gestao/img/dashboard.png" %}" alt="Dashboard"> <span>Dashboard</span></a>
+            <a href="{% url "listar-projetos" %}">{% load static %} <img src="{% static "gestao/img/projects.png" %}" alt="Projetos"> <span>Projetos</span></a>
+            <a href="{% url "listar-clientes" %}">{% load static %} <img src="{% static "gestao/img/clients.png" %}" alt="Clientes"> <span>Clientes</span></a>
         </nav>
     </div>
