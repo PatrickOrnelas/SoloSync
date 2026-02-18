@@ -320,7 +320,7 @@ p {
     margin-bottom: 10px;
 }
 
-.project-description-card {
+.description-card {
     background: var(--white);
     padding: 25px;
     border-radius: 12px;
@@ -328,7 +328,7 @@ p {
     margin-bottom: 30px;
 }
 
-.project-description-card h3 {
+.description-card h3 {
     font-size: 1.3rem;
     color: var(--dark);
     margin-bottom: 15px;
@@ -350,6 +350,12 @@ p {
 
 .stat-card .value {
     font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.stat-card .task-value {
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--dark);
 }

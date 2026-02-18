@@ -10,54 +10,35 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <header class="home-header">
+        <header class="header-card">
             <h1>Detalhes da Tarefa</h1>
             <p>Acompanhe as informações detalhadas da tarefa selecionada.</p>  
         </header>
-
-        <!-- Card Principal -->
-        <div class="detail-card welcome-card">
-            <div class="detail-header">
-                <h2>{{ tarefa.titulo }}</h2>
-                <div class="detail-status">
-                    <span class="status-badge status-{{ tarefa.status }}">
-                        {{ tarefa.get_status_display }}
-                    </span>
+        <div class="header-actions">
+                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-edit">{% load static %}<img src="{% static 'gestao/img/edit.png' %}" alt="Editar Tarefa"> Editar Tarefa</a>
+                <a href="{% url "deletar-tarefa" tarefa.id %}" onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')" class="btn btn-delete">{% load static %}<img src="{% static 'gestao/img/delete.png' %}" alt="Deletar Tarefa"> Deletar Tarefa</a>
+                <a href="{% url 'concluir-tarefa' tarefa.id tarefa.projeto.id %}" class="btn btn-finish">{% load static %}<img src="{% static 'gestao/img/finish.png' %}" alt="Concluir Tarefa"> Concluir Tarefa</a>
+        </div>
+        <div class="task-details">
+            <div class="stats-grid">
+                <div class="stat-card title">
+                    <h3>Nome da Tarefa</h3>
+                    <p class="task-value">{{ tarefa.titulo }}</p>
                 </div>
-            </div>
-
-            <!-- Informações Principais -->
-            <div class="info-grid">
-                <div class="info-item">
-                    <label>Data de Criação</label>
-                    <p>{{ tarefa.data_criacao|date:"d \d\e F \d\e Y \à\s H:i" }}</p>
+                <div class="stat-card prize">
+                    <h3>Data de Criação</h3>
+                    <p class="task-value">{{ tarefa.data_criacao|date:"d/m/Y" }}</p>
                 </div>
-                <div class="info-item">
-                    <label>Projeto</label>
-                    <p><a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="link-projeto">{{ tarefa.projeto.titulo }}</a></p>
+                <div class="stat-card value">
+                    <h3>Status</h3>
+                    <p class="task-value"><span class="status-badge status-{{ tarefa.status }}">{{ tarefa.get_status_display }}</span></p>
                 </div>
-            </div>
-
-            <!-- Descrição -->
-            <div class="detail-description">
+            </div>        
+            <div class="description-card">
                 <h3>Descrição da Tarefa</h3>
                 <p>{{ tarefa.descricao }}</p>
             </div>
-
-            <!-- Ações -->
-            <div class="action-buttons">
-                {% if tarefa.status != 'concluido' %}
-                    <a href="{% url 'concluir-tarefa' tarefa.id tarefa.projeto.id %}" class="btn btn-success">Concluir Tarefa</a>
-                {% endif %}
-                <a href="{% url 'editar-tarefa' tarefa.id %}" class="btn btn-primary">Editar</a>
-                <button onclick="if(confirm('Tem certeza que deseja deletar essa tarefa?')) window.location.href='{% url 'deletar-tarefa' tarefa.id %}';" class="btn btn-delete">Deletar</button>
-            </div>
-        </div>
-
-        <!-- Botão Voltar -->
-        <div class="back-button-container">
             <a href="{% url 'detalhar-projeto' tarefa.projeto.id %}" class="btn btn-back">Voltar</a>
-        </div>
     </div>
     {% include "gestao/partials/_script.html" %}
 </body>
