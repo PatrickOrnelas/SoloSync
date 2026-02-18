@@ -144,6 +144,20 @@ p {
     box-shadow: 0px 10px 15px rgba(30, 32, 116, 0.1);
 }
 
+.board-title {
+    text-align: center;
+    font-size: 30px; 
+    margin-bottom: 10px;
+}
+
+.board-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
 .task-cards {
     display: flex;
     gap: 20px;
@@ -577,7 +591,6 @@ p {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-bottom: 4px solid var(--primary);
     border-top: 4px solid var(--primary);
 }
 
@@ -587,7 +600,6 @@ p {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-bottom: 4px solid var(--warning);
     border-top: 4px solid var(--warning);
 }
 
@@ -597,6 +609,5 @@ p {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    border-bottom: 4px solid var(--success);
     border-top: 4px solid var(--success);
 }
