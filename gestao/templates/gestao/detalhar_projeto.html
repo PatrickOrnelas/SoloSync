@@ -21,15 +21,15 @@
         </div>
         <div class="project-details">
             <div class="stats-grid">
-                <div class="stat-card total">
-                    <h3>Cliente</h3>
-                    <p class="value">{{ projeto.cliente.nome }}</p>
+                <div class="stat-card title">
+                    <h3>Nome do Projeto</h3>
+                    <p class="value">{{ projeto.titulo }}</p>
                 </div>
-                <div class="stat-card">
+                <div class="stat-card prize">
                     <h3>Prazo Final</h3>
                     <p class="value">{{ projeto.prazo_entrega|date:"d/m/Y" }}</p>
                 </div>
-                <div class="stat-card active">
+                <div class="stat-card value">
                     <h3>Valor do Contrato</h3>
                     <p class="value">R$ {{ projeto.valor_fechado }}</p>
                 </div>
@@ -70,8 +70,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="detail-description welcome-card" style="text-align: left; margin-top: 0;">
-                <h3 style="margin-bottom: 10px;">Descrição do Projeto</h3>
+            <div class="project-description-card">
+                <h3>Descrição do Projeto</h3>
                 <p>{{ projeto.descricao }}</p>
             </div>
         </div>

@@ -295,11 +295,20 @@ p {
     border-bottom: 4px solid #ddd;
 }
 
-.stat-card.total {
+.stat-card.title {
     border-color: var(--primary);
 }
 
-.stat-card.active {
+
+.stat-card.client {
+    border-color: var(--primary);
+}
+
+.stat-card.prize {
+    border-color: var(--warning);
+}
+
+.stat-card.value {
     border-color: var(--success);
 }
 
@@ -310,6 +319,34 @@ p {
     color: #64748b;
     margin-bottom: 10px;
 }
+
+.project-description-card {
+    background: var(--white);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.project-description-card h3 {
+    font-size: 1.3rem;
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+.btn.btn-back {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.5s ease;
+}
+
+.btn.btn-back:hover {
+    background-color: #4f46e5;
+}
+
 
 .stat-card .value {
     font-size: 1.8rem;
