@@ -11,13 +11,15 @@
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
         <section class="form-section">
-            <header class="dashboard-header">
-                <h1>Novo <span>Cliente</span></h1>
+            <header class="header-card">
+                <h1>Novo Cliente</h1>
+                <p>Preencha o formulário abaixo para adicionar um novo cliente à sua lista.</p>
             </header>
 
             <div class="form-card">
                 <form method="POST">
-                    {% csrf_token %} {% for field in form %}
+                    {% csrf_token %}
+                    {% for field in form %}
                         <div class="form-content">
                             <label class="form-label">{{ field.label }}</label>
                             {{ field }}
@@ -27,8 +29,8 @@
                         </div>
                     {% endfor %}
                     <div class="btn-group">
-                        <button type="submit" class="btn-salvar">Salvar</button>
-                        <a class="btn-cancelar" href="{% url 'listar-clientes' %}">Cancelar</a>
+                        <button type="submit" class="btn-save">Salvar</button>
+                        <a class="btn-cancel" href="{% url 'listar-clientes' %}">Cancelar</a>
                     </div>
                 </form>
             </div>

@@ -11,8 +11,9 @@
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
         <section class="form-section">
-            <header class="dashboard-header">
-                <h1>Criar <span>Tarefa</span></h1>
+            <header class="header-card">
+                <h1>Nova Tarefa</h1>
+                <p>Preencha o formulário abaixo para adicionar uma nova tarefa à sua lista.</p>
             </header>
 
             <div class="form-card">
@@ -28,8 +29,8 @@
                         </div>
                     {% endfor %}
                     <div class="btn-group">
-                        <button type="submit" class="btn-salvar">Salvar</button>
-                        <a class="btn-cancelar" href="{% url 'detalhar-projeto' projeto.id %}">Cancelar</a>
+                        <button type="submit" class="btn-save">Salvar</button>
+                        <a class="btn-cancel" href="{% url 'detalhar-projeto' projeto.id %}">Cancelar</a>
                     </div>
                 </form>
             </div>

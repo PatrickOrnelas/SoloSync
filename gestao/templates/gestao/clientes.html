@@ -10,15 +10,15 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <div class="home-header">
+        <div class="header-card">
             <h1>Clientes</h1>
             <p>Aqui você pode visualizar e gerenciar os clientes da sua empresa.</p>
-            <div class="header-actions">
-                <a href="{% url "criar-cliente" %}" class="btn-primary">+ Adicionar Cliente</a>
-            </div>
         </div>
+            <div class="table-header">
+                <h2>Meus Clientes</h2>
+                <a href="{% url 'criar-cliente' %}" class="btn btn-primary">+ Novo Cliente</a>
+            </div>
         <section class="clients-section">
-            <h3>Seus Clientes</h3>
             <div class="table-container">
                 <table class="custom-table">
                     <thead>
@@ -32,23 +32,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cliente in clientes  %}
+                        {% for cliente in clientes %}
                         <tr>
-                            <td class="font-bold"><a href="{% url "detalhar-cliente" cliente.id %}">{{ cliente.nome }}</a></td>
+                            <td class="font-bold"><a href="{% url 'detalhar-cliente' cliente.id %}">{{ cliente.nome }}</a></td>
                             <td>{{ cliente.projetos.count }}</td>
                             <td>{{ cliente.email }}</td>
                             <td>{{ cliente.telefone }}</td>
                             <td>{{ cliente.empresa }}</td>
-                            <td>
-                                <a href="{% url "editar-cliente" cliente.id %}" class="btn btn-edit">Editar</a>
-                                <a href="{% url "deletar-cliente" cliente.id %}" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja remover este cliente:')">Remover</a>
+                            <td class="actions">
+                                <a href="{% url 'editar-cliente' cliente.id %}">{% load static %} <img src="{% static 'gestao/img/edit.png' %}" alt="Btn Editar"></a>
+                                <a href="{% url 'deletar-cliente' cliente.id %}" class="btn-delete" onclick="return confirm('Tem certeza que deseja deletar este cliente?')">{% load static %} <img src="{% static 'gestao/img/delete.png' %}" alt="Btn Deletar"></a>
                             </td>
+                        </tr>
+                        {% empty %}
+                        <tr>    
+                            <td colspan="6" class="empty-msg">Nenhum cliente cadastrado ainda.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
-        </section>
     </div>
     {% include "gestao/partials/_script.html" %}
 </body>

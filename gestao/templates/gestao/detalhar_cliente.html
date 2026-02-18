@@ -10,20 +10,65 @@
 <body>
     {% include "gestao/partials/_sidebar.html" %}
     <div class="main-content">
-        <div class="home-header">
+        <div class="header-card">
             <h1>Detalhes do Cliente</h1>
             <p>Aqui você pode visualizar os detalhes do cliente selecionado.</p>
         </div>
-        <section class="client-details-section">
+        <div class="header-actions">
+                <a href="{% url 'editar-cliente' cliente.id %}" class="btn btn-edit">{% load static %}<img src="{% static 'gestao/img/edit.png' %}" alt="Editar Cliente"> Editar Cliente</a>
+                <a href="{% url "deletar-cliente" cliente.id %}" onclick="return confirm('Tem certeza que deseja deletar este cliente?')" class="btn btn-delete">{% load static %}<img src="{% static 'gestao/img/delete.png' %}" alt="Deletar Cliente"> Deletar Cliente</a>
+        </div>
+        <div class="main-card">
             <h3>Informações do Cliente</h3>
-            <div class="client-info">
-                <p><strong>Nome:</strong> {{ cliente.nome }}</p>
-                <p><strong>Email:</strong> {{ cliente.email }}</p>
-                <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
-                <p><strong>Empresa:</strong> {{ cliente.empresa }}</p>
+            <div class="client-details">
+                <div class="client-name">
+                    <h3>Nome</h3>
+                    <p>{{ cliente.nome }}</p>
+                </div>
+                <div class="client-email">
+                    <h3>Email</h3>
+                    <p>{{ cliente.email }}</p>
+                </div>
+                <div class="client-phone">
+                    <h3>Telefone</h3>
+                    <p>{{ cliente.telefone }}</p>
+                </div>
+                <div class="client-company">
+                    <h3>Empresa</h3>
+                    <p>{{ cliente.empresa }}</p>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+            <div class="main-card">
+                <h3>Projetos do Cliente</h3>
+                <div class="table-container">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Título do Projeto</th>
+                                <th>Prazo de Entrega</th>
+                                <th>Valor do Contrato</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for projeto in cliente.projetos.all %}
+                            <tr>
+                                <td class="font-bold"><a href="{% url "detalhar-projeto" projeto.id %}">{{ projeto.titulo }}</a></td>
+                                <td>{{ projeto.prazo_entrega|date:"d/m/Y" }}</td>
+                                <td class="price">R$ {{ projeto.valor_fechado }}</td>
+                                <td><span class="status-badge status-{{ projeto.status }}">{{ projeto.get_status_display }}</span></td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" style="text-align: center;">Nenhum projeto encontrado para este cliente.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <a href="{% url 'listar-clientes' %}" class="btn btn-back">Voltar</a>
     {% include "gestao/partials/_script.html" %}
 </body>
 </html>
