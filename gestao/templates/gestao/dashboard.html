@@ -14,7 +14,16 @@
         <h1>🚀 SoloSync <span>Dashboard</span></h1>
         <p>Gerencie seus projetos e finanças de forma simples.</p>
     </header>
-
+    <div class="card-graph">
+        <div class="graph-container">
+            <h3>Distribuição de Carga</h3>
+            <canvas id="loadChart"></canvas>
+        </div>  
+        <div class="graph-container">
+            <h3>Visão Geral dos Projetos</h3>
+            <canvas id="statusChart"></canvas>
+        </div>
+    </div>
     <section class="stats-grid">
         <div class="stat-card total">
             <h3>Faturamento Total</h3>
@@ -76,5 +85,35 @@
     </div>
 </div>
      {% include "gestao/partials/_script.html" %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('loadChart').getContext('2d');
+        new Chart(ctx, {
+            type:'doughnut',
+            data: {
+                labels: {{ status_labels|safe }},
+                datasets: [{
+                    data: {{ status_counts|safe }},
+                    backgroundColor: ['#6366f1', '#f59e0b', '#22c55e'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#334155',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
