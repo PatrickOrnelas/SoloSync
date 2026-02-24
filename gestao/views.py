@@ -195,6 +195,11 @@ def editar_cliente(request, cliente_id):
 def dashboard(request):
     # Consulta todos os projetos
     projetos = Projeto.objects.all()
+    # Contagem total de projetos
+    total_projetos = projetos.count()
+
+    # Valor total dos projetos (soma de todos os valores fechados)
+    valor_total = projetos.aggregate(Sum('valor_fechado'))['valor_fechado__sum'] or 0
     
     # Contagem de projetos por status
     contagem_planejamento = projetos.filter(status='planejamento').count()
@@ -213,6 +218,8 @@ def dashboard(request):
 
     context = {
         'projetos': projetos,
+        'total_projetos': total_projetos,
+        'valor_total': valor_total,
         'total_planejamento': contagem_planejamento,
         'total_em_andamento': contagem_em_andamento,
         'total_concluido': contagem_concluido,
