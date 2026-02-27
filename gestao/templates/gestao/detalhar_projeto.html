@@ -44,6 +44,7 @@
                         <tr>
                             <th>Título</th>
                             <th>Descrição da Tarefa</th>
+                            <th>Prazo</th>
                             <th>Data de Criação</th>
                             <th>Status</th>
                             <th>Ações</th>
@@ -54,6 +55,7 @@
                         <tr>
                             <td  class="font-bold"><a href="{% url "detalhar-tarefa" tarefa.id %}">{{tarefa.titulo}}</a></td>
                             <td>{{ tarefa.descricao }}</td>
+                            <td>{{ tarefa.prazo_entrega|date:"d/m/Y" }}</td>
                             <td>{{ tarefa.data_criacao|date:"d/m/Y H:i" }}</td>
                             <td><span class="status-badge status-{{ tarefa.status }}">{{ tarefa.get_status_display }}</span></td>
                             <td class="actions">
@@ -64,7 +66,7 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="4" class="empty-msg">Nenhuma tarefa cadastrada para este projeto.</td>
+                            <td colspan="6" class="empty-msg">Nenhuma tarefa cadastrada para este projeto.</td>
                         </tr>
                         {% endfor %}
                     </tbody>

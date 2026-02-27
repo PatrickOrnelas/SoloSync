@@ -1,4 +1,4 @@
-from datetime import timezone
+from django.utils import timezone
 from django import forms
 from .models import Projeto, Cliente, Tarefa
 
@@ -60,29 +60,36 @@ class ClienteForm(forms.ModelForm):
 class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
-        fields = ['titulo', 'descricao', 'status']
+        fields = ['titulo', 'descricao', 'prazo_entrega', 'status']
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'title-input', 'placeholder': 'Título da tarefa'}),
             'descricao': forms.Textarea(attrs={'class': 'description-input', 'placeholder': 'Descrição...', 'rows': 3}),
+            'prazo_entrega': forms.DateInput(attrs={'class': 'date-input', 'type': 'date'}),
             'status': forms.Select(attrs={'class': 'status-select'}),
         }
 
         labels = {
             'titulo': 'Título da Tarefa',
             'descricao': 'Descrição da Tarefa',
+            'prazo_entrega': 'Prazo de Entrega',
             'status': 'Status da Tarefa',
         }
 
-        def clean(self):
-            cleaned_data = super().clean()
-            titulo = cleaned_data.get('titulo')
-            descricao = cleaned_data.get('descricao')
+    def clean(self):
+        cleaned_data = super().clean()
+        titulo = cleaned_data.get('titulo')
+        descricao = cleaned_data.get('descricao')
+        prazo = cleaned_data.get('prazo_entrega')
 
-            if titulo and len(titulo) < 5:
-                self.add_error('titulo', 'O título deve conter pelo menos 5 caracteres.')
+        if titulo and len(titulo) < 5:
+            self.add_error('titulo', 'O título deve conter pelo menos 5 caracteres.')
 
-            if descricao and len(descricao) < 10:
-                self.add_error('descricao', 'A descrição deve conter pelo menos 10 caracteres.')
+        if descricao and len(descricao) < 10:
+            self.add_error('descricao', 'A descrição deve conter pelo menos 10 caracteres.')
 
-            return cleaned_data
+        # se quiser, poderia validar prazo, por exemplo não permitir data passada
+        if prazo and prazo < timezone.now().date():
+            self.add_error('prazo_entrega', 'O prazo de entrega não pode ser no passado.')
+
+        return cleaned_data

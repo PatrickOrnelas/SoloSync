@@ -37,7 +37,12 @@ class Tarefa(models.Model):
     titulo = models.CharField(max_length=200)
     data_criacao = models.DateTimeField(auto_now_add=True)
     descricao = models.CharField(max_length=255)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    prazo_entrega = models.DateField(blank=True, null=True)
     status = models.CharField(max_length=20, choices=Projeto.STATUS_CHOICES, default='planejamento')
 
     def __str__(self):
+        # inclui informação de prazo se presente
+        if self.prazo_entrega:
+            return f"{self.projeto.titulo} - {self.descricao} (prazo {self.prazo_entrega})"
         return f"{self.projeto.titulo} - {self.descricao}"

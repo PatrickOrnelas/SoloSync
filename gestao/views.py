@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from .models import Projeto, Cliente, Tarefa
 from django.db.models import Sum
 from .forms import ProjetoForm, TarefaForm, ClienteForm
+from django.utils import timezone
+from datetime import timedelta
 
 # View de inicio
 def index(request):
@@ -197,6 +199,7 @@ def dashboard(request):
     projetos = Projeto.objects.all()
     # Contagem total de projetos
     total_projetos = projetos.count()
+    total_ativos = projetos.filter(status__in=['planejamento', 'em_andamento']).count()
 
     # Valor total dos projetos (soma de todos os valores fechados)
     valor_total = projetos.aggregate(Sum('valor_fechado'))['valor_fechado__sum'] or 0
@@ -216,9 +219,33 @@ def dashboard(request):
     # Conta quantos projetos estão em execução
     projetos_ativos = projetos.filter(status='em_andamento').count()
 
+    hoje = timezone.now().date()
+    # Define o fim da "janela" de 7 dias (Pode ser o final da semana ou apenas +7 dias a partir de hoje)
+    fim_da_semana = hoje + timedelta(days=7)
+
+    #Filtra objetos que vencem entre hoje e os próximos 7 dias e que ainda não estão concluídos
+    tarefas_semana = Tarefa.objects.filter(
+        prazo_entrega__range=(hoje, fim_da_semana),
+        status__in=['planejamento', 'em_andamento']
+    ).exclude(status='concluido').order_by('prazo_entrega')
+    
+    projetos_semena = Projeto.objects.filter(
+        prazo_entrega__range=(hoje, fim_da_semana),
+        status__in=['planejamento', 'em_andamento']
+    ).exclude(status='concluido').order_by('prazo_entrega')
+    
+
+    # Contagem para o card de resumo
+    total_tarefas_a_vencer = tarefas_semana.count()
+    total_projetos_a_vencer = projetos_semena.count()
+
     context = {
         'projetos': projetos,
+        'tarefas_semana': tarefas_semana,
+        'total_tarefas_a_vencer': total_tarefas_a_vencer,
+        'total_projetos_a_vencer': total_projetos_a_vencer,
         'total_projetos': total_projetos,
+        'total_ativos': total_ativos,
         'valor_total': valor_total,
         'total_planejamento': contagem_planejamento,
         'total_em_andamento': contagem_em_andamento,
