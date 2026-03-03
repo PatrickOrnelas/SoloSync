@@ -221,10 +221,10 @@ Diferente do projeto (que tem um prazo geral), cada **tarefa pode ter seu própr
 
 ### Boas práticas com prazos
 
-✅ Sempre defina prazos para tarefas críticas
-✅ Deixe um espaço entre o prazo da tarefa e do projeto
-✅ Use prazos para priorizar o trabalho do dia
-✅ Monitore diariamente quais tarefas vencem logo
+   - ✅ Sempre defina prazos para tarefas críticas
+   - ✅ Deixe um espaço entre o prazo da tarefa e do projeto
+   - ✅ Use prazos para priorizar o trabalho do dia
+   - ✅ Monitore diariamente quais tarefas vencem logo
 
 ---
 
@@ -297,12 +297,12 @@ O Dashboard é sua **central de controle**. Nele você verá:
 
 ## 💡 Dicas e Boas Práticas
 
-✅ **Sempre defina prazos** - Mantenha a disciplina com datas
-✅ **Use status corretamente** - Isso ajuda nos relatórios
-✅ **Descreva bem as tarefas** - Facilita foco no que fazer
-✅ **Organize por cliente** - Agrupe projetos do mesmo cliente
-✅ **Acompanhe o Dashboard** - Revise sua situação financeira regularmente
-✅ **Mantenha clientes atualizados** - Use as informações para relatórios
+   - ✅ **Sempre defina prazos** - Mantenha a disciplina com datas
+   - ✅ **Use status corretamente** - Isso ajuda nos relatórios
+   - ✅ **Descreva bem as tarefas** - Facilita foco no que fazer
+   - ✅ **Organize por cliente** - Agrupe projetos do mesmo cliente
+   - ✅ **Acompanhe o Dashboard** - Revise sua situação financeira regularmente
+   - ✅ **Mantenha clientes atualizados** - Use as informações para relatórios
 
 ---
 
