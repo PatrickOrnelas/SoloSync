@@ -4,18 +4,6 @@
 
 ---
 
-## 📋 Índice
-1. [Instalação e Setup](#instalação-e-setup)
-2. [Primeira vez acessando](#primeira-vez-acessando)
-3. [Gerenciando Clientes](#gerenciando-clientes)
-4. [Criando e Acompanhando Projetos](#criando-e-acompanhando-projetos)
-5. [Organizando Tarefas](#organizando-tarefas)
-6. [Prazos de Entrega](#prazos-de-entrega)
-7. [Acompanhando Finanças](#acompanhando-finanças)
-8. [Dashboard e Relatórios](#dashboard-e-relatórios)
-
----
-
 ## ⚙️ Instalação e Setup
 
 ### Pré-requisitos
